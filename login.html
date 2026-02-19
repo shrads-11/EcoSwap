@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - EcoSwap</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Include the same CSS variables and base styles as the index.html */
+        :root {
+            --primary-green: #2E8B57;
+            --light-green: #90EE90;
+            --dark-green: #1E5A3D;
+            --cream: #F8F8F0;
+            --gray: #555;
+            --light-gray: #F0F0F0;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--cream);
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles - same as index.html */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        .logo h1 {
+            color: var(--primary-green);
+            font-size: 1.8rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary-green);
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-green);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--dark-green);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary-green);
+            border: 2px solid var(--primary-green);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-green);
+            color: var(--white);
+        }
+
+        /* Page Specific Styles */
+        .login-container {
+            display: flex;
+            min-height: calc(100vh - 80px);
+            align-items: center;
+            padding: 40px 0;
+        }
+
+        .login-form-container {
+            flex: 1;
+            max-width: 450px;
+            margin: 0 auto;
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-header h2 {
+            color: var(--primary-green);
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .login-header p {
+            color: var(--gray);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark-green);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--light-gray);
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-green);
+        }
+
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .remember-me input[type="checkbox"] {
+            accent-color: var(--primary-green);
+        }
+
+        .forgot-password {
+            color: var(--primary-green);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 25px 0;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background-color: var(--light-gray);
+        }
+
+        .divider span {
+            padding: 0 15px;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .social-login {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid var(--light-gray);
+            background-color: var(--white);
+        }
+
+        .social-btn:hover {
+            background-color: var(--light-gray);
+        }
+
+        .social-btn.google {
+            color: #DB4437;
+        }
+
+        .social-btn.facebook {
+            color: #4267B2;
+        }
+
+        .login-footer {
+            text-align: center;
+            margin-top: 20px;
+            color: var(--gray);
+        }
+
+        .login-footer a {
+            color: var(--primary-green);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .login-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .welcome-section {
+            flex: 1;
+            padding: 0 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .welcome-section h2 {
+            color: var(--primary-green);
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .welcome-section p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .feature-icon {
+            background-color: var(--light-green);
+            color: var(--primary-green);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        /* Footer - same as index.html */
+        footer {
+            background-color: var(--dark-green);
+            color: var(--white);
+            padding: 70px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-col h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-col a:hover {
+            color: var(--light-green);
+        }
+
+        .newsletter {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .newsletter input {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .login-container {
+                flex-direction: column;
+            }
+
+            .welcome-section {
+                padding: 40px 0;
+                max-width: 450px;
+                margin: 0 auto;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header - same as index.html -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="https://z-cdn-media.chatglm.cn/files/c3047dad-ca6e-494e-97ed-0e9f3e932875_pasted_image_1761754161539.png?auth_key=1793290223-51ff7a76f9324a8d913cb9b04e14b089-0-cc10e0e2a30225cedb83d351d4c4ea60" alt="EcoSwap Logo">
+                <h1>EcoSwap</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="how-it-works.html">How It Works</a></li>
+                    <li><a href="features.html">Features</a></li>
+                    <li><a href="marketplace.html">Marketplace</a></li>
+                    <li><a href="community.html">Community</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="nav-actions">
+                <a href="signup.html" class="btn btn-outline">Sign Up</a>
+                <a href="login.html" class="btn btn-primary">Login</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Login Section -->
+    <section class="login-container">
+        <div class="welcome-section">
+            <h2>Welcome Back to EcoSwap</h2>
+            <p>Log in to continue your sustainable journey and connect with our community of eco-conscious swappers.</p>
+            <ul class="feature-list">
+                <li>
+                    <div class="feature-icon">
+                        <i class="fas fa-recycle"></i>
+                    </div>
+                    <div>Continue swapping and reducing waste</div>
+                </li>
+                <li>
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div>Connect with the sustainability community</div>
+                </li>
+                <li>
+                    <div class="feature-icon">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <div>Track and use your EcoPoints</div>
+                </li>
+                <li>
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div>Monitor your environmental impact</div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="login-form-container">
+            <div class="login-header">
+                <h2>Login to Your Account</h2>
+                <p>Enter your credentials to access your account</p>
+            </div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="form-control" required>
+                </div>
+
+                <div class="form-options">
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember">
+                        <label for="remember">Remember me</label>
+                    </div>
+                    <a href="#" class="forgot-password">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+            </form>
+
+            <div class="divider">
+                <span>or login with</span>
+            </div>
+
+            <div class="social-login">
+                <button class="social-btn google">
+                    <i class="fab fa-google"></i> Continue with Google
+                </button>
+                <button class="social-btn facebook">
+                    <i class="fab fa-facebook-f"></i> Continue with Facebook
+                </button>
+            </div>
+
+            <div class="login-footer">
+                Don't have an account? <a href="signup.html">Sign Up</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer - same as index.html -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>EcoSwap</h3>
+                    <p>Promoting sustainability, reducing waste, and encouraging a circular economy through accessible product exchange.</p>
+                    <div class="logo" style="margin-top: 15px;">
+                        <img src="https://z-cdn-media.chatglm.cn/files/c3047dad-ca6e-494e-97ed-0e9f3e932875_pasted_image_1761754161539.png?auth_key=1793290223-51ff7a76f9324a8d913cb9b04e14b089-0-cc10e0e2a30225cedb83d351d4c4ea60" alt="EcoSwap Logo" style="height: 40px;">
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="how-it-works.html">How It Works</a></li>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="marketplace.html">Marketplace</a></li>
+                        <li><a href="community.html">Community</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to get updates on new features and sustainability tips.</p>
+                    <div class="newsletter">
+                        <input type="email" placeholder="Your email address">
+                        <button class="btn btn-primary">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 EcoSwap Pvt. Ltd. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Form submission
+            const loginForm = document.getElementById('loginForm');
+            
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form values
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                const remember = document.getElementById('remember').checked;
+                
+                // Here you would normally send the form data to a server for authentication
+                // For demo purposes, we'll just show a success message
+                alert(`Welcome back to EcoSwap! You have been successfully logged in.`);
+                
+                // Redirect to home page
+                window.location.href = 'index.html';
+            });
+            
+            // Social login buttons
+            const googleBtn = document.querySelector('.social-btn.google');
+            const facebookBtn = document.querySelector('.social-btn.facebook');
+            
+            googleBtn.addEventListener('click', function() {
+                alert('Google login functionality would be implemented here.');
+            });
+            
+            facebookBtn.addEventListener('click', function() {
+                alert('Facebook login functionality would be implemented here.');
+            });
+            
+            // Forgot password link
+            const forgotPasswordLink = document.querySelector('.forgot-password');
+            
+            forgotPasswordLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('Password reset functionality would be implemented here.');
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

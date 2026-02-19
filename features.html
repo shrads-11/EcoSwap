@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Features - EcoSwap</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Include the same CSS variables and base styles as the index.html */
+        :root {
+            --primary-green: #2E8B57;
+            --light-green: #90EE90;
+            --dark-green: #1E5A3D;
+            --cream: #F8F8F0;
+            --gray: #555;
+            --light-gray: #F0F0F0;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--cream);
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles - same as index.html */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        .logo h1 {
+            color: var(--primary-green);
+            font-size: 1.8rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary-green);
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-green);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--dark-green);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary-green);
+            border: 2px solid var(--primary-green);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-green);
+            color: var(--white);
+        }
+
+        /* Page Specific Styles */
+        .page-header {
+            background-color: var(--primary-green);
+            color: var(--white);
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .page-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .page-header p {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-green);
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        .features-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-image {
+            height: 200px;
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--primary-green);
+        }
+
+        .feature-content {
+            padding: 25px;
+        }
+
+        .feature-content h3 {
+            color: var(--primary-green);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .feature-content p {
+            margin-bottom: 15px;
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .feature-list li i {
+            color: var(--primary-green);
+            margin-top: 5px;
+        }
+
+        .comparison-section {
+            background-color: var(--light-gray);
+            padding: 80px 0;
+        }
+
+        .comparison-table {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .comparison-table th {
+            background-color: var(--primary-green);
+            color: var(--white);
+            padding: 15px;
+            text-align: left;
+        }
+
+        .comparison-table td {
+            padding: 15px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .check {
+            color: var(--primary-green);
+            font-size: 1.2rem;
+        }
+
+        .cross {
+            color: #e74c3c;
+            font-size: 1.2rem;
+        }
+
+        .eco-badge {
+            background-color: var(--light-green);
+            color: var(--dark-green);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Footer - same as index.html */
+        footer {
+            background-color: var(--dark-green);
+            color: var(--white);
+            padding: 70px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-col h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-col a:hover {
+            color: var(--light-green);
+        }
+
+        .newsletter {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .newsletter input {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .comparison-table {
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header - same as index.html -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="https://z-cdn-media.chatglm.cn/files/c3047dad-ca6e-494e-97ed-0e9f3e932875_pasted_image_1761754161539.png?auth_key=1793290223-51ff7a76f9324a8d913cb9b04e14b089-0-cc10e0e2a30225cedb83d351d4c4ea60" alt="EcoSwap Logo">
+                <h1>EcoSwap</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="how-it-works.html">How It Works</a></li>
+                    <li><a href="features.html" class="active">Features</a></li>
+                    <li><a href="marketplace.html">Marketplace</a></li>
+                    <li><a href="community.html">Community</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="nav-actions">
+                <a href="signup.html" class="btn btn-outline">Sign Up</a>
+                <a href="login.html" class="btn btn-primary">Login</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <h2>Platform Features</h2>
+            <p>Discover the powerful features that make EcoSwap the leading sustainable swapping platform.</p>
+        </div>
+    </div>
+
+    <!-- Features Showcase -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Core Features</h2>
+                <p>Our platform is designed with sustainability and user experience at its core.</p>
+            </div>
+            <div class="features-showcase">
+                <div class="feature-card">
+                    <div class="feature-image">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Swap Functionality</h3>
+                        <p>Our intuitive swapping system allows you to exchange items without money using EcoPoints.</p>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check-circle"></i> Virtual currency system (EcoPoints)</li>
+                            <li><i class="fas fa-check-circle"></i> Fair valuation algorithm</li>
+                            <li><i class="fas fa-check-circle"></i> One-click swap requests</li>
+                            <li><i class="fas fa-check-circle"></i> Negotiation options</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-image">
+                        <i class="fas fa-user-check"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Verification System</h3>
+                        <p>Build trust within the community through our comprehensive verification process.</p>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check-circle"></i> User verification badges</li>
+                            <li><i class="fas fa-check-circle"></i> Item authenticity checks</li>
+                            <li><i class="fas fa-check-circle"></i> Rating and review system</li>
+                            <li><i class="fas fa-check-circle"></i> Report and moderation tools</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-image">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Community Feed</h3>
+                        <p>Connect with like-minded individuals and share sustainability tips and ideas.</p>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check-circle"></i> Sustainability tips and articles</li>
+                            <li><i class="fas fa-check-circle"></i> DIY upcycling projects</li>
+                            <li><i class="fas fa-check-circle"></i> User success stories</li>
+                            <li><i class="fas fa-check-circle"></i> Community challenges</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-image">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>AI-Powered Matching</h3>
+                        <p>Our intelligent system recommends the best swaps based on your preferences and needs.</p>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check-circle"></i> Personalized recommendations</li>
+                            <li><i class="fas fa-check-circle"></i> Preference-based matching</li>
+                            <li><i class="fas fa-check-circle"></i> Carbon footprint tracking</li>
+                            <li><i class="fas fa-check-circle"></i> Sustainability impact reports</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-image">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Mobile & Web Access</h3>
+                        <p>Access EcoSwap anytime, anywhere with our responsive web platform and mobile apps.</p>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check-circle"></i> iOS and Android apps</li>
+                            <li><i class="fas fa-check-circle"></i> Responsive web design</li>
+                            <li><i class="fas fa-check-circle"></i> Push notifications</li>
+                            <li><i class="fas fa-check-circle"></i> Offline access to listings</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-image">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Security & Privacy</h3>
+                        <p>Your data and transactions are protected with industry-standard security measures.</p>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check-circle"></i> End-to-end encryption</li>
+                            <li><i class="fas fa-check-circle"></i> Secure payment processing</li>
+                            <li><i class="fas fa-check-circle"></i> Privacy controls</li>
+                            <li><i class="fas fa-check-circle"></i> GDPR compliant</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section class="comparison-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>How We Compare</h2>
+                <p>EcoSwap offers unique features that set us apart from other platforms.</p>
+            </div>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>EcoSwap</th>
+                            <th>OLX</th>
+                            <th>Quikr</th>
+                            <th>Poshmark</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Swap-Based Model</td>
+                            <td><i class="fas fa-check check"></i> <span class="eco-badge">EXCLUSIVE</span></td>
+                            <td><i class="fas fa-times cross"></i></td>
+                            <td><i class="fas fa-times cross"></i></td>
+                            <td><i class="fas fa-times cross"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Eco-Friendly Focus</td>
+                            <td><i class="fas fa-check check"></i> <span class="eco-badge">CORE</span></td>
+                            <td><i class="fas fa-times cross"></i></td>
+                            <td><i class="fas fa-times cross"></i></td>
+                            <td><i class="fas fa-check check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Community Feed</td>
+                            <td><i class="fas fa-check check"></i></td>
+                            <td><i class="fas fa-times cross"></i></td>
+                            <td><i class="fas fa-times cross"></i></td>
+                            <td><i class="fas fa-check check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>AI Matching</td>
+                            <td><i class="fas fa-check check"></i></td>
+                            <td><i class="fas fa-times cross"></i></td>
+                            <td><i class="fas fa-times cross"></i></td>
+                            <td><i class="fas fa-check check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Carbon Footprint Tracking</td>
+                            <td><i class="fas fa-check check"></i> <span class="eco-badge">EXCLUSIVE</span></td>
+                            <td><i class="fas fa-times cross"></i></td>
+                            <td><i class="fas fa-times cross"></i></td>
+                            <td><i class="fas fa-times cross"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Verification System</td>
+                            <td><i class="fas fa-check check"></i></td>
+                            <td><i class="fas fa-times cross"></i></td>
+                            <td><i class="fas fa-times cross"></i></td>
+                            <td><i class="fas fa-check check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>EcoPoints System</td>
+                            <td><i class="fas fa-check check"></i> <span class="eco-badge">EXCLUSIVE</span></td>
+                            <td><i class="fas fa-times cross"></i></td>
+                            <td><i class="fas fa-times cross"></i></td>
+                            <td><i class="fas fa-times cross"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Premium Membership</td>
+                            <td><i class="fas fa-check check"></i></td>
+                            <td><i class="fas fa-check check"></i></td>
+                            <td><i class="fas fa-check check"></i></td>
+                            <td><i class="fas fa-check check"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer - same as index.html -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>EcoSwap</h3>
+                    <p>Promoting sustainability, reducing waste, and encouraging a circular economy through accessible product exchange.</p>
+                    <div class="logo" style="margin-top: 15px;">
+                        <img src="https://z-cdn-media.chatglm.cn/files/c3047dad-ca6e-494e-97ed-0e9f3e932875_pasted_image_1761754161539.png?auth_key=1793290223-51ff7a76f9324a8d913cb9b04e14b089-0-cc10e0e2a30225cedb83d351d4c4ea60" alt="EcoSwap Logo" style="height: 40px;">
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="how-it-works.html">How It Works</a></li>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="marketplace.html">Marketplace</a></li>
+                        <li><a href="community.html">Community</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to get updates on new features and sustainability tips.</p>
+                    <div class="newsletter">
+                        <input type="email" placeholder="Your email address">
+                        <button class="btn btn-primary">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 EcoSwap Pvt. Ltd. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
